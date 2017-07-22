@@ -50,3 +50,10 @@ Created by Laurent Le Brun (LLB / Ctrl-Alt-Test).
 
   http://laurent.le-brun.eu
   http://ctrl-alt-test.fr
+
+
+This fork has some modifications done to accommodate the Leviathan 2.0 4k intro
+framework better.
+
+  https://github.com/armak/Leviathan-2.0/
+  http://noby.untergrund.net/

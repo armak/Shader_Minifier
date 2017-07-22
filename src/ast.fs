@@ -7,7 +7,7 @@ type targetOutput = Text | CHeader | CList | JS | Nasm
 let version = "1.1.4" // Shader Minifer version
 let debugMode = false
 
-let mutable outputName = "shader_code.h"
+let mutable outputName = "fragment.inl"
 let mutable targetOutput = CHeader
 let mutable verbose = false
 let mutable smoothstepTrick = false

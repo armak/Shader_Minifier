@@ -56,7 +56,7 @@ let floatToS f =
     let si = if f < 0. then "-" else ""
     let test = out "%g" (abs f)
     // display "3." instead of "3"
-    if fst (System.Int32.TryParse test) then !!(out "%g." f)
+    if fst (System.Int32.TryParse test) then !!(out "%g" f)
     // display ".5" instead of "0.5"
     else if test.[0] = '0' then si + !!(test.[1..])
     else si + !!test

@@ -26,32 +26,17 @@ let printHeader data asAList =
       else Path.GetFileName Ast.outputName
   let macroName = fileName.Replace(".", "_").ToUpper() + "_"
 
-  fprintfn out "/* File generated with Shader Minifier %s" Ast.version
-  fprintfn out " * http://www.ctrl-alt-test.fr"
-  fprintfn out " */"
+  // meh
+  // fprintfn out "// File generated with Shader Minifier %s http://www.ctrl-alt-test.fr, modifications by noby" Ast.version
 
-  if not asAList then
-      fprintfn out "#ifndef %s" macroName
-      fprintfn out "# define %s" macroName
-
-  for ty, name, newName in List.sort !exportedValues do
-    // let newName = Printer.identTable.[int newName]
-    if ty = "" then
-        fprintfn out "# define VAR_%s \"%s\"" (name.ToUpper()) newName
-    else
-        fprintfn out "# define %c_%s \"%s\"" (System.Char.ToUpper ty.[0]) (name.ToUpper()) newName
-
-  fprintfn out ""
+  // would really like to remove this but crashes if taken out...
+  fprintf out ""
   for file, code in data do
-    let name = (Path.GetFileName file).Replace(".", "_")
-    if asAList then
-        fprintfn out "// %s" file
-        fprintfn out "\"%s\"," (Printer.print code)
-    else
-        fprintfn out "const char *%s =\r\n \"%s\";" name (Printer.print code)
-    fprintfn out ""
-
-  if not asAList then fprintfn out "#endif // %s" macroName
+    let name = (Path.GetFileName file).Split('.').[0]
+    fprintfn out "#pragma data_seg(\".shader\")"
+    fprintfn out "const char* %s =\r\n \"%s\";" name (Printer.print code)
+    
+  //if not asAList then fprintfn out "#endif // %s" macroName
 
 let printNoHeader data =
   use out = output()
